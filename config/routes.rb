@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :statuses
+  resources :city_data
   resources :user_types
   # get 'home/index'
   # devise_for :users

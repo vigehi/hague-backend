@@ -6,19 +6,18 @@ class User < ApplicationRecord
 
   #  Associations
   belongs_to :user_type
+  has_many :city_data, dependent: :destroy
 
   # Validations
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
   validates :user_type, presence: true
 
   # enum user's role and set a default role
-  enum role: [:user, :admin]
+  enum role: [:user, :admin, :super_admin]
   after_initialize :set_default_role, :if => :new_record?
 
   private
 
   def set_default_role
-    self.role ||= :user
+    self.role ||= :user if new_record?
   end
 end

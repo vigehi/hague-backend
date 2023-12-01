@@ -1,0 +1,2 @@
+module CityDataHelper
+end

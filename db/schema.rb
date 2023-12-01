@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_01_185059) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_202110) do
+  create_table "city_data", force: :cascade do |t|
+    t.string "cityName"
+    t.string "seasonalVariation"
+    t.string "externalFactors"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_city_data_on_user_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "status_name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_types", force: :cascade do |t|
     t.string "type_name"
     t.datetime "created_at", null: false
@@ -33,5 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_185059) do
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
   end
 
+  add_foreign_key "city_data", "users"
   add_foreign_key "users", "user_types"
 end
